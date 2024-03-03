@@ -1,0 +1,11 @@
+/home/isaac/Documents/ogl/target/debug/deps/libpixel_formats-2e6262ddd18e9812.rmeta: /home/isaac/.cargo/registry/src/index.crates.io-6f17d22bba15001f/pixel_formats-0.1.5/src/lib.rs /home/isaac/.cargo/registry/src/index.crates.io-6f17d22bba15001f/pixel_formats-0.1.5/src/_1field.rs /home/isaac/.cargo/registry/src/index.crates.io-6f17d22bba15001f/pixel_formats-0.1.5/src/_3field.rs /home/isaac/.cargo/registry/src/index.crates.io-6f17d22bba15001f/pixel_formats-0.1.5/src/_4field.rs /home/isaac/.cargo/registry/src/index.crates.io-6f17d22bba15001f/pixel_formats-0.1.5/src/_3packed.rs
+
+/home/isaac/Documents/ogl/target/debug/deps/libpixel_formats-2e6262ddd18e9812.rlib: /home/isaac/.cargo/registry/src/index.crates.io-6f17d22bba15001f/pixel_formats-0.1.5/src/lib.rs /home/isaac/.cargo/registry/src/index.crates.io-6f17d22bba15001f/pixel_formats-0.1.5/src/_1field.rs /home/isaac/.cargo/registry/src/index.crates.io-6f17d22bba15001f/pixel_formats-0.1.5/src/_3field.rs /home/isaac/.cargo/registry/src/index.crates.io-6f17d22bba15001f/pixel_formats-0.1.5/src/_4field.rs /home/isaac/.cargo/registry/src/index.crates.io-6f17d22bba15001f/pixel_formats-0.1.5/src/_3packed.rs
+
+/home/isaac/Documents/ogl/target/debug/deps/pixel_formats-2e6262ddd18e9812.d: /home/isaac/.cargo/registry/src/index.crates.io-6f17d22bba15001f/pixel_formats-0.1.5/src/lib.rs /home/isaac/.cargo/registry/src/index.crates.io-6f17d22bba15001f/pixel_formats-0.1.5/src/_1field.rs /home/isaac/.cargo/registry/src/index.crates.io-6f17d22bba15001f/pixel_formats-0.1.5/src/_3field.rs /home/isaac/.cargo/registry/src/index.crates.io-6f17d22bba15001f/pixel_formats-0.1.5/src/_4field.rs /home/isaac/.cargo/registry/src/index.crates.io-6f17d22bba15001f/pixel_formats-0.1.5/src/_3packed.rs
+
+/home/isaac/.cargo/registry/src/index.crates.io-6f17d22bba15001f/pixel_formats-0.1.5/src/lib.rs:
+/home/isaac/.cargo/registry/src/index.crates.io-6f17d22bba15001f/pixel_formats-0.1.5/src/_1field.rs:
+/home/isaac/.cargo/registry/src/index.crates.io-6f17d22bba15001f/pixel_formats-0.1.5/src/_3field.rs:
+/home/isaac/.cargo/registry/src/index.crates.io-6f17d22bba15001f/pixel_formats-0.1.5/src/_4field.rs:
+/home/isaac/.cargo/registry/src/index.crates.io-6f17d22bba15001f/pixel_formats-0.1.5/src/_3packed.rs:
