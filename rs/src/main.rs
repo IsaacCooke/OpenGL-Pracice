@@ -8,6 +8,7 @@ use core::{
     convert::{TryFrom, TryInto},
     mem::{size_of, size_of_val},
 };
+use glm::{builtin::*, Matrix4};
 use ogl33::load_gl_with;
 use ogl33::*;
 

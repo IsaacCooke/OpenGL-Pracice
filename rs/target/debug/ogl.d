@@ -1,1 +1,1 @@
-/home/isaac/Documents/ogl/target/debug/ogl: /home/isaac/Documents/ogl/src/helper.rs /home/isaac/Documents/ogl/src/main.rs
+/home/isaac/Documents/ogl/rs/target/debug/ogl: /home/isaac/Documents/ogl/rs/src/helper.rs /home/isaac/Documents/ogl/rs/src/main.rs
