@@ -144,7 +144,7 @@ int main( void )
 	glBindVertexArray(VertexArrayID);
 
 	// Create and compile our GLSL program from the shaders
-  GLuint programID = LoadShaders("./SimpleVertexShader.vertexshader", "./SimpleFragmentShader.fragmentshader");
+  GLuint programID = LoadShaders("./SimpleVertexShader.vert", "./SimpleFragmentShader.frag");
 
   // Generate vertex buffers
 	GLuint vertexbuffer;
