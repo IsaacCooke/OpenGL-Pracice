@@ -1,3 +1,0 @@
-/home/isaac/Documents/ogl/cpp/build/CMakeFiles/main.dir
-/home/isaac/Documents/ogl/cpp/build/CMakeFiles/edit_cache.dir
-/home/isaac/Documents/ogl/cpp/build/CMakeFiles/rebuild_cache.dir
