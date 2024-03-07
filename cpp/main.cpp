@@ -15,6 +15,7 @@ GLFWwindow* window;
 using namespace glm;
 
 #include "common/shader.hpp"
+#include "common/texture.hpp"
 
 static const GLfloat g_vertex_buffer_data[] = {
     -1.0f,-1.0f,-1.0f, // triangle 1 : begin
@@ -92,6 +93,45 @@ static const GLfloat g_color_buffer_data[] = {
     0.673f,  0.211f,  0.457f,
     0.820f,  0.883f,  0.371f,
     0.982f,  0.099f,  0.879f
+};
+
+static const GLfloat g_uv_buffer_data[] = {
+    0.000059f, 1.0f-0.000004f,
+    0.000103f, 1.0f-0.336048f,
+    0.335973f, 1.0f-0.335903f,
+    1.000023f, 1.0f-0.000013f,
+    0.667979f, 1.0f-0.335851f,
+    0.999958f, 1.0f-0.336064f,
+    0.667979f, 1.0f-0.335851f,
+    0.336024f, 1.0f-0.671877f,
+    0.667969f, 1.0f-0.671889f,
+    1.000023f, 1.0f-0.000013f,
+    0.668104f, 1.0f-0.000013f,
+    0.667979f, 1.0f-0.335851f,
+    0.000059f, 1.0f-0.000004f,
+    0.335973f, 1.0f-0.335903f,
+    0.336098f, 1.0f-0.000071f,
+    0.667979f, 1.0f-0.335851f,
+    0.335973f, 1.0f-0.335903f,
+    0.336024f, 1.0f-0.671877f,
+    1.000004f, 1.0f-0.671847f,
+    0.999958f, 1.0f-0.336064f,
+    0.667979f, 1.0f-0.335851f,
+    0.668104f, 1.0f-0.000013f,
+    0.335973f, 1.0f-0.335903f,
+    0.667979f, 1.0f-0.335851f,
+    0.335973f, 1.0f-0.335903f,
+    0.668104f, 1.0f-0.000013f,
+    0.336098f, 1.0f-0.000071f,
+    0.000103f, 1.0f-0.336048f,
+    0.000004f, 1.0f-0.671870f,
+    0.336024f, 1.0f-0.671877f,
+    0.000103f, 1.0f-0.336048f,
+    0.336024f, 1.0f-0.671877f,
+    0.335973f, 1.0f-0.335903f,
+    0.667969f, 1.0f-0.671889f,
+    1.000004f, 1.0f-0.671847f,
+    0.667979f, 1.0f-0.335851f
 };
 
 int main( void )
@@ -234,47 +274,4 @@ int main( void )
 	glfwTerminate();
 
 	return 0;
-}
-
-GLuint loadBMP_custom(const char * imagepath){
-  unsigned char header[54];
-  unsigned int dataPos;
-  unsigned int width, height;
-  unsigned int imageSize;
-
-  unsigned char * data;
-
-  FILE * file = fopen(imagepath, "rb");
-  if (!file) {
-    printf("File could not be found\n");
-    return 0;
-  }
-
-  if(fread(header, 1, 54, file) != 54){
-    printf("Not a BMP file");
-    return false;
-  }
-
-  if (header[0] != 'B' || header[1] != 'M'){
-    printf("Not a correct BMP file\n");
-    return 0;
-  }
-
-  dataPos = *(int*)&(header[0x0A]);
-  imageSize = *(int*)&(header[0x22]);
-  width = *(int*)&(header[0x12]);
-  height = *(int*)&(header[0x16]);
-
-  if (imageSize == 0) {
-    imageSize = width * height;
-  }
-  if (dataPos == 0){
-    dataPos = 54;
-  }
-
-  data = new unsigned char [imageSize];
-  fread(data, 1, imageSize, file);
-  fclose(file);
-
-  return 0;
 }

@@ -1,12 +1,12 @@
 #version 330 core
 
 // Input data
-in vec3 fragmentColor;
+in vec2 UV;
 
 // Ouput data
 out vec3 color;
 
 void main(){
 	// Output color = color in vertex shader
-	color = fragmentColor;
+	color = texture(myTextureSampler, UV).rgb;
 }
