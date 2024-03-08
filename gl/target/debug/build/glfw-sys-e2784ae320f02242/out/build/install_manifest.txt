@@ -1,0 +1,8 @@
+/home/isaac/Documents/ogl/gl/target/debug/build/glfw-sys-e2784ae320f02242/out/lib/libglfw3.a
+/home/isaac/Documents/ogl/gl/target/debug/build/glfw-sys-e2784ae320f02242/out/include/GLFW/glfw3native.h
+/home/isaac/Documents/ogl/gl/target/debug/build/glfw-sys-e2784ae320f02242/out/include/GLFW/glfw3.h
+/home/isaac/Documents/ogl/gl/target/debug/build/glfw-sys-e2784ae320f02242/out/lib/cmake/glfw3/glfw3Config.cmake
+/home/isaac/Documents/ogl/gl/target/debug/build/glfw-sys-e2784ae320f02242/out/lib/cmake/glfw3/glfw3ConfigVersion.cmake
+/home/isaac/Documents/ogl/gl/target/debug/build/glfw-sys-e2784ae320f02242/out/lib/cmake/glfw3/glfw3Targets.cmake
+/home/isaac/Documents/ogl/gl/target/debug/build/glfw-sys-e2784ae320f02242/out/lib/cmake/glfw3/glfw3Targets-debug.cmake
+/home/isaac/Documents/ogl/gl/target/debug/build/glfw-sys-e2784ae320f02242/out/lib/pkgconfig/glfw3.pc

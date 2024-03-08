@@ -21,6 +21,8 @@ use core::{
 use helper::{Buffer, BufferType, Shader, ShaderProgram, ShaderType, VertexArray, *};
 use ogl33::*;
 
+use glm::{self, ext::perspective, Matrix4};
+
 type Vertex = [f32; 3 + 3 + 2];
 type TriIndexes = [u32; 3];
 
