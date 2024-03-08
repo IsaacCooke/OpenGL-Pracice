@@ -186,6 +186,9 @@ int main( void )
 	// Create and compile our GLSL program from the shaders
   GLuint programID = LoadShaders("./SimpleVertexShader.vert", "./SimpleFragmentShader.frag");
 
+  GLuint Texture = loadDDS("uvtemplate.DDS");
+  GLuint TextureID = glGetUniformLocation(programID, "myTextureSampler");
+
   // Generate vertex buffers
 	GLuint vertexbuffer;
 	glGenBuffers(1, &vertexbuffer);
@@ -197,6 +200,11 @@ int main( void )
   glGenBuffers(1, &colorbuffer);
   glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
   glBufferData(GL_ARRAY_BUFFER, sizeof(g_color_buffer_data), g_color_buffer_data, GL_STATIC_DRAW);
+
+  GLuint uvbuffer;
+  glGenBuffers(1, &uvbuffer);
+  glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+  glBufferData(GL_ARRAY_BUFFER, sizeof(g_uv_buffer_data), g_uv_buffer_data, GL_STATIC_DRAW);
 
   // Get handle for mvp matrix
   GLuint MatrixID = glGetUniformLocation(programID, "MVP");
@@ -218,6 +226,7 @@ int main( void )
   // Model - View - Projection matrix
   mat4 MVP = Projection * View * Model;
 
+
 	do{
 
 		// Clear the screen
@@ -228,6 +237,12 @@ int main( void )
 
 		// Use our shader
 		glUseProgram(programID);
+
+
+    // Bind textures
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, Texture);
+    glUniform1i(TextureID, 0);
 
 		// 1rst attribute buffer : vertices
 		glEnableVertexAttribArray(0);
@@ -242,10 +257,10 @@ int main( void )
 		);
 
     glEnableVertexAttribArray(1);
-    glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
     glVertexAttribPointer(
       1,
-      3,
+      2,
       GL_FLOAT,
       GL_FALSE,
       0,
@@ -256,6 +271,7 @@ int main( void )
 		glDrawArrays(GL_TRIANGLES, 0, 12*3); // 3 indices starting at 0 -> 1 triangle
 
 		glDisableVertexAttribArray(0);
+    glDisableVertexAttribArray(1);
 
 		// Swap buffers
 		glfwSwapBuffers(window);
@@ -267,6 +283,8 @@ int main( void )
 
 	// Cleanup VBO
 	glDeleteBuffers(1, &vertexbuffer);
+  glDeleteBuffers(1, &uvbuffer);
+  glDeleteTextures(1, &Texture);
 	glDeleteVertexArrays(1, &VertexArrayID);
 	glDeleteProgram(programID);
 
