@@ -22,7 +22,7 @@ set(ALL_LIBS
 file(GLOB_RECURSE COMMON "common/*.cpp")
 
 # Add main executable
-add_executable(main main.cpp ${COMMON})
+add_executable(main main.cpp ${COMMON} common/texture.cpp common/texture.hpp)
 
 # Link libraries
 target_link_libraries(main 
