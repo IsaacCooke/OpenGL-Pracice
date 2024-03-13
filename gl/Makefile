@@ -20,3 +20,9 @@ clean:
 
 run: $(EXECUTABLE)
 	./$(EXECUTABLE)
+
+# test: main.o
+#     g++ -o Test  -L./lib -lglew32 -lglfw3 -lopengl32 -lglu32 -lgdi32 main.o
+#
+# test.o: main.cpp
+#     g++ -I./include -c main.cpp

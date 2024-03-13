@@ -1,5 +1,5 @@
-#include <GLFW/glfw3.h>
-#include <GL/gl.h>
+#include "include/GLFW/glfw3.h"
+#include <gl/GL.h>
 
 #include <iostream>
 
