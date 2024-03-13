@@ -1,10 +1,16 @@
-#include "include/GLFW/glfw3.h"
-#include <gl/GL.h>
+#include <GLFW/glfw3.h>
+#include <GL/gl.h>
 
 #include <iostream>
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow *window);
+
+const float vertices[] = {
+  -0.5f, -0.5f, 0.0f,
+  0.5f, -0.5f, 0.0f,
+  0.0f, 0.5f, 0.0f
+};
 
 int main(){
   glfwInit();
@@ -28,8 +34,14 @@ int main(){
   glViewport(0, 0, 800, 600);
   glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
+  unsigned int VBO;
+
   while (!glfwWindowShouldClose(window)){
     processInput(window);
+
+    // Rendering commands here
+    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
 
 
     glfwSwapBuffers(window);
