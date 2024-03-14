@@ -37,7 +37,12 @@ fn main() {
     let shader_program = render_gl::Program::from_shaders(&[vert_shader, frag_shader]).unwrap();
     shader_program.set_used();
 
-    let vertices: Vec<f32> = vec![-0.5, -0.5, 0.0, 0.5, -0.5, 0.0, 0.0, 0.5, 0.0];
+    let vertices: Vec<f32> = vec![
+        // positions      // colors
+        0.5, -0.5, 0.0, 1.0, 0.0, 0.0, // bottom right
+        -0.5, -0.5, 0.0, 0.0, 1.0, 0.0, // bottom left
+        0.0, 0.5, 0.0, 0.0, 0.0, 1.0, // top
+    ];
 
     let mut vbo: GLuint = 0;
     unsafe {
@@ -65,8 +70,18 @@ fn main() {
             3,
             gl::FLOAT,
             gl::FALSE,
-            (3 * std::mem::size_of::<f32>()) as gl::types::GLint,
+            (6 * std::mem::size_of::<f32>()) as gl::types::GLint,
             std::ptr::null(),
+        );
+
+        gl::EnableVertexAttribArray(1); // this is "layout (location = 0)" in vertex shader
+        gl::VertexAttribPointer(
+            1,         // index of the generic vertex attribute ("layout (location = 0)")
+            3,         // the number of components per generic vertex attribute
+            gl::FLOAT, // data type
+            gl::FALSE, // normalized (int-to-float conversion)
+            (6 * std::mem::size_of::<f32>()) as GLint, // stride (byte offset between consecutive attributes)
+            (3 * std::mem::size_of::<f32>()) as *const GLvoid, // offset of the first component
         );
 
         // Unbind VBO and VAO
