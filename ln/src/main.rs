@@ -1,6 +1,5 @@
 extern crate gl;
 extern crate glfw;
-extern crate sdl2;
 
 pub mod render_gl;
 
