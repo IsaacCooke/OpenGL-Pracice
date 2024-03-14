@@ -1,24 +1,26 @@
 extern crate gl;
+extern crate glfw;
 extern crate sdl2;
 
 pub mod render_gl;
 
+use glfw::Context;
+
 use crate::render_gl::*;
-use std::ffi::{CStr, CString};
+use std::ffi::{c_void, CStr, CString};
 
 fn main() {
-    let sdl = sdl2::init().unwrap();
-    let video_subsystem = sdl.video().unwrap();
-    let window = video_subsystem
-        .window("Game", 900, 700)
-        .opengl()
-        .resizable()
-        .build()
-        .unwrap();
+    use glfw::fail_on_errors;
+    let mut glfw = glfw::init(fail_on_errors!()).unwrap();
+    let (mut window, events) = glfw
+        .create_window(900, 700, "Game", glfw::WindowMode::Windowed)
+        .expect("Failed to create window");
 
-    let _gl_context = window.gl_create_context().unwrap();
-    let _gl =
-        gl::load_with(|s| video_subsystem.gl_get_proc_address(s) as *const std::os::raw::c_void);
+    window.make_current();
+    window.set_framebuffer_size_polling(true);
+    window.focus();
+
+    gl::load_with(|symbol| window.get_proc_address(symbol) as *const c_void);
 
     unsafe {
         gl::Viewport(0, 0, 900, 700);
@@ -35,21 +37,28 @@ fn main() {
     let shader_program = render_gl::Program::from_shaders(&[vert_shader, frag_shader]).unwrap();
     shader_program.set_used();
 
-    let mut event_pump = sdl.event_pump().unwrap();
-    'main: loop {
-        for event in event_pump.poll_iter() {
-            // handle user input
-            match event {
-                sdl2::event::Event::Quit { .. } => break 'main,
-                _ => {}
-            }
+    while !window.should_close() {
+        glfw.poll_events();
+        for (_, event) in glfw::flush_messages(&events) {
+            handle_window_event(&mut window, event);
         }
 
-        // render window contents
         unsafe {
             gl::Clear(gl::COLOR_BUFFER_BIT);
         }
 
-        window.gl_swap_window();
+        window.swap_buffers();
+    }
+}
+
+fn handle_window_event(window: &mut glfw::Window, event: glfw::WindowEvent) {
+    match event {
+        glfw::WindowEvent::Key(glfw::Key::Escape, _, glfw::Action::Press, _) => {
+            window.set_should_close(true);
+        }
+        glfw::WindowEvent::FramebufferSize(width, height) => unsafe {
+            gl::Viewport(0, 0, width, height);
+        },
+        _ => {}
     }
 }
