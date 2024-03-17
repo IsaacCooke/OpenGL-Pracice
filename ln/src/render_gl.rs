@@ -3,17 +3,23 @@ use std;
 use std::ffi::{CStr, CString};
 
 pub struct Shader {
+    gl: gl::Gl,
     id: gl::types::GLuint,
 }
 
 pub struct Program {
+    gl: gl::Gl,
     id: gl::types::GLuint,
 }
 
 impl Shader {
-    pub fn from_source(source: &CStr, kind: gl::types::GLenum) -> Result<Shader, String> {
+    pub fn from_source(
+        gl: &gl::Gl,
+        source: &CStr,
+        kind: gl::types::GLenum,
+    ) -> Result<Shader, String> {
         let id = shader_from_source(source, kind)?;
-        Ok(Shader { id })
+        Ok(Shader { gl, id })
     }
 
     pub fn from_vert_source(source: &CStr) -> Result<Shader, String> {
@@ -38,7 +44,7 @@ impl Drop for Shader {
 }
 
 impl Program {
-    pub fn from_shaders(shaders: &[Shader]) -> Result<Program, String> {
+    pub fn from_shaders(gl: gl::Gl, shaders: &[Shader]) -> Result<Program, String> {
         let program_id = unsafe { gl::CreateProgram() };
 
         for shader in shaders {
@@ -82,7 +88,7 @@ impl Program {
             }
         }
 
-        Ok(Program { id: program_id })
+        Ok(Program { gl, id: program_id })
     }
 
     pub fn id(&self) -> gl::types::GLuint {

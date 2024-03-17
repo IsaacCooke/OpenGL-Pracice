@@ -27,12 +27,16 @@ fn main() {
         gl::ClearColor(0.3, 0.3, 0.5, 1.0);
     }
 
-    let vert_shader =
-        render_gl::Shader::from_vert_source(&CString::new(include_str!("vert.glsl")).unwrap())
-            .unwrap();
-    let frag_shader =
-        render_gl::Shader::from_frag_source(&CString::new(include_str!("frag.glsl")).unwrap())
-            .unwrap();
+    let vert_shader = render_gl::Shader::from_vert_source(
+        gl.clone(),
+        &CString::new(include_str!("vert.glsl").unwrap()),
+    )
+    .unwrap();
+    let frag_shader = render_gl::Shader::from_frag_source(
+        gl.clone(),
+        &CString::new(include_str!("frag.glsl")).unwrap(),
+    )
+    .unwrap();
 
     let shader_program = render_gl::Program::from_shaders(&[vert_shader, frag_shader]).unwrap();
     shader_program.set_used();
