@@ -1,11 +1,13 @@
-use std::ops::ControlFlow;
+use std::iter;
 
 use winit::{
     event::*,
     event_loop::{ControlFlow, EventLoop},
-    window::Window,
-    window::WindowBuilder,
+    window::{Window, WindowBuilder},
 };
+
+#[cfg(target_arch = "wasm32")]
+use wasm_bindgen::prelude::*;
 
 struct State {
     surface: wgpu::Surface,
