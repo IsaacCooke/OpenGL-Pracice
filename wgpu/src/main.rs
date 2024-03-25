@@ -19,6 +19,7 @@ struct State {
     window: Window,
     render_pipeline: wgpu::RenderPipeline,
     vertex_buffer: wgpu::Buffer,
+    num_verticies: u32,
 }
 
 #[repr(C)]
@@ -55,6 +56,9 @@ impl State {
 
         // Ensure the window is not removed before the state
         let surface = unsafe { instance.create_surface(&window) }.unwrap();
+
+        // Set number of verticies to be drawn
+        let num_verticies = VERTICIES.len() as u32;
 
         let adapter = instance
             .request_adapter(&wgpu::RequestAdapterOptions {
@@ -118,7 +122,7 @@ impl State {
             vertex: wgpu::VertexState {
                 module: &shader,
                 entry_point: "vs_main",
-                buffers: &[],
+                buffers: &[Vertex::desc()],
             },
             fragment: Some(wgpu::FragmentState {
                 module: &shader,
@@ -161,6 +165,8 @@ impl State {
             config,
             size,
             render_pipeline,
+            vertex_buffer,
+            num_verticies,
         }
     }
 
@@ -217,13 +223,35 @@ impl State {
             });
 
             render_pass.set_pipeline(&self.render_pipeline);
-            render_pass.draw(0..3, 0..1);
+            render_pass.set_vertex_buffer(0, self.vertex_buffer.slice(..));
+            render_pass.draw(0..self.num_verticies, 0..1);
         }
 
         self.queue.submit(std::iter::once(encoder.finish()));
         output.present();
 
         Ok(())
+    }
+}
+
+impl Vertex {
+    fn desc() -> wgpu::VertexBufferLayout<'static> {
+        wgpu::VertexBufferLayout {
+            array_stride: std::mem::size_of::<Vertex>() as wgpu::BufferAddress,
+            step_mode: wgpu::VertexStepMode::Vertex,
+            attributes: &[
+                wgpu::VertexAttribute {
+                    offset: 0,
+                    shader_location: 0,
+                    format: wgpu::VertexFormat::Float32x3,
+                },
+                wgpu::VertexAttribute {
+                    offset: std::mem::size_of::<[f32; 3]>() as wgpu::BufferAddress,
+                    shader_location: 1,
+                    format: wgpu::VertexFormat::Float32x3,
+                },
+            ],
+        }
     }
 }
 
